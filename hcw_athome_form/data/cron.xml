@@ -1,0 +1,12 @@
+<odoo>
+    <record id="ir_cron_partner_autocomplete" model="ir.cron">
+        <field name="name">HCW : Sync opened consultation</field>
+        <field name="model_id" ref="model_hcw_consultation"/>
+        <field name="state">code</field>
+        <field name="code">model.start_sync()</field>
+        <field name="interval_number">60</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field eval="False" name="doall"/>
+    </record>
+</odoo>

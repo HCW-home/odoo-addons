@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="hcw_athome_form.consultation_request" name="Consultation request">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mt-4 mt-lg-0 o_colored_level">
+
+                        <br />
+
+                        <h1>Consultation request</h1>
+                        <p>You are about to request consultation. On submit, you will be queue in the specific Area requested. Please note your consultation can takes several hours to be handled. You will be notified by email on consultation update.</p>
+
+                        <form id="consultation_request_form" action="/consultation/submit" method="post" enctype="multipart/form-data" class="o_mark_required" data-pre-fill="true">
+                            <div class="s_website_form_rows row s_col_no_bgcolor">
+
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                                <div class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required" data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="queue">
+                                            <span class="s_website_form_label_content">Area requested</span>
+                                            <span class="s_website_form_mark">     *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-select form-select" aria-label=".form-select-sm" id="queue" name="queue">
+                                                <option>Choose an option</option>
+                                                <option t-foreach="queues" t-as="queue" t-att-value="queue['id']"><t t-esc="queue['name']"/></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required" data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="firstname">
+                                            <span class="s_website_form_label_content">Firstname</span>
+                                            <span class="s_website_form_mark">     *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="firstname" required="1" placeholder="" id="firstname" data-fill-with="firstname"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required" data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="lastname">
+                                            <span class="s_website_form_label_content">Lastname</span>
+                                            <span class="s_website_form_mark">     *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="lastname" required="1" placeholder="" id="lastname" data-fill-with="lastname"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required" data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="gender">
+                                            <span class="s_website_form_label_content">Gender</span>
+                                            <span class="s_website_form_mark">     *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-select form-select" aria-label=".form-select-sm" id="gender" name="gender">
+                                                <option value="male">Masculine</option>
+                                                <option value="female">Feminine</option>
+                                                <!-- <option value="neuter">Neuter</option> -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-0 py-2 col-12 s_website_form_field s_website_form_custom" data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="email">
+                                            <span class="s_website_form_label_content">Email</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input id="email" type="mail" class="form-control s_website_form_input" name="email" data-fill-with="email" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-0 py-2 col-12 s_website_form_field s_website_form_custom" data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="contact2">
+                                            <span class="s_website_form_label_content">Phone Number</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input id="contact2" type="tel" class="form-control s_website_form_input" name="phone" data-fill-with="phone" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-0 py-2 col-12 s_website_form_submit" data-name="Submit Button">
+                                    <div style="width: 200px;" class="s_website_form_label">
+                                        <input class="btn btn-primary btn-lg s_website_form_send" type="submit" value="Send Request" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="hcw_athome_form.portal" name="Consultation request" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_my_home')]" position="before">
+            <div class="o_portal_my_consultation">
+                <t t-if="consultation_count">
+                    <h3>Consultations</h3>
+                    <p>You have currently an active consultation, click on the button button to resume.</p>
+                    <a href="/consultation/resume" type="button" class="btn btn-primary rounded-circle">Resume the consultation</a>
+                </t>
+                <t t-else="">
+                    <h3>New consultations</h3>
+                    <a href="/consultation/request" type="button" class="btn btn-primary rounded-circle">New consultation</a>
+                </t>
+                <br />
+                <h3>Active and past consultations</h3>
+                <p>Get status of your active and past consultations.</p>
+                <a t-att-href="'/my/consultations'" t-att-title="title" class="list-group-item list-group-item-action d-flex align-items-center justify-content-between">
+                    Consultations
+                    <span class="badge text-bg-secondary rounded-pill" t-esc="consultation_count"/>
+                </a>
+            </div>
+        </xpath>
+    </template>
+
+
+    <template id="hcw_athome_form.my_consultations" name="My consultation">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mt-4 mt-lg-0 o_colored_level">
+                        <table class="table rounded mb-0 bg-white o_portal_my_doc_table">
+                            <thead>
+                                <tr>
+                                    <!-- TODO: get a short version of HCW ID-->
+                                    <th>ID</th>
+                                    <th>Firstname</th>
+                                    <th>Lastname</th>
+                                    <!-- TODO: store gender-->
+                                    <th>Gender</th>
+                                    <th>Created at</th>
+                                    <th>State</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            <tr t-foreach="consultations" t-as="consultation">
+                                <td><t t-out="consultation.id"/></td>
+                                <td><t t-out="consultation.patient_firstname"/></td>
+                                <td><t t-out="consultation.patient_lastname"/></td>
+                                <td></td>
+                                <!-- <td><t t-out="consultation.gender"/></td> -->
+                                <td><t t-out="consultation.create_date"/></td>
+                                <td><t t-out="consultation.state"/></td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+                <!-- <t t-foreach="consultations" t-as="consultation">
+                    <t t-out=="consultation"/>
+                </t> -->
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="consultation_request" name="Consultation request">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mt-4 mt-lg-0 o_colored_level">
+
+                        <br />
+
+                        <h2>Consultation request</h2>
+
+                        <div class="alert alert-warning" role="alert">
+                            If you want to resume an previous consultation, <strong><a target="_blank" t-att-href="patient_url">please click here</a></strong>.
+                        </div>
+                        
+                        <p>You are about to request consultation. On submit, you will be queue in the healthcare worker. 
+                        Please note your consultation can takes several minutes to several hours to be handled. You will be notified by email on consultation update.</p>
+
+                        <div class="alert alert-info" role="alert">
+                            You are about to request consultation with <strong><t t-out="user.name"/></strong>.
+                        </div>
+
+                        <form id="consultation_request_form" t-att-action="'/consultation/create/' + invite" method="post" enctype="multipart/form-data" class="o_mark_required" data-pre-fill="true">
+                            <div class="s_website_form_rows row s_col_no_bgcolor">
+
+
+
+                                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+                                <div class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required" data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="firstname">
+                                            <span class="s_website_form_label_content">Firstname</span>
+                                            <span class="s_website_form_mark">     *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="firstname" required="1" placeholder="" id="firstname" data-fill-with="firstname"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required" data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="lastname">
+                                            <span class="s_website_form_label_content">Lastname</span>
+                                            <span class="s_website_form_mark">     *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="lastname" required="1" placeholder="" id="lastname" data-fill-with="lastname"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="s_website_form_field mb-3 col-12 s_website_form_custom s_website_form_required" data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="gender">
+                                            <span class="s_website_form_label_content">Gender</span>
+                                            <span class="s_website_form_mark">     *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-select form-select" aria-label=".form-select-sm" id="gender" name="gender">
+                                                <option value="male">Masculine</option>
+                                                <option value="female">Feminine</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-0 py-2 col-12 s_website_form_field s_website_form_custom" data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="email">
+                                            <span class="s_website_form_label_content">Email</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input id="email" type="mail" class="form-control s_website_form_input" name="email" data-fill-with="email" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-0 py-2 col-12 s_website_form_field s_website_form_custom" data-type="char" data-name="Field">
+                                    <div class="row s_col_no_resize s_col_no_bgcolor">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px" for="contact2">
+                                            <span class="s_website_form_label_content">Phone Number</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input id="contact2" type="tel" class="form-control s_website_form_input" name="phone" data-fill-with="phone" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-0 py-2 col-12 s_website_form_submit" data-name="Submit Button">
+                                    <div style="width: 200px;" class="s_website_form_label">
+                                        <input class="btn btn-primary btn-lg s_website_form_send" type="submit" value="Send Request" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="invalid_request" name="Invalid invite">
+        <t t-call="website.layout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mt-4 mt-lg-0 o_colored_level">
+                        <h1>Invalid invite</h1>
+                        <p>This invite is not valid</p>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="portal_consultation" name="Consultation request" inherit_id="portal.portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_my_home')]" position="before">
+            <div class="o_portal_my_consultation">
+
+                <h3>Consultation invites</h3>
+                <p>To invite someone to your waiting room, you can share the following link.</p>
+                <div class="alert alert-warning" role="alert">
+                    To ensure you don't miss any consultation requests while offline, please enable SMS notifications on your HCW@Home profile page.
+                </div>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="linkField" t-att-value="base_url + '/invite/' + user_id.secnum" readonly="1"/>
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="button" onclick="copyLink()">Copy</button>
+                    </div>
+                </div>
+
+
+                <script>
+                    function copyLink() {
+                    var linkField = document.getElementById("linkField");
+                    linkField.select();
+                    document.execCommand("copy");
+                    }
+                </script>
+            </div>
+        </xpath>
+    </template>
+
+
+
+</odoo>
