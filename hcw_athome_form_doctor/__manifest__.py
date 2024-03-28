@@ -23,4 +23,5 @@
     ],
     "demo": [],
     "installable": True,
+    "images": ['static/description/main_screenshot.png']
 }

@@ -18,5 +18,5 @@
     ],
     "demo": [],
     "installable": True,
-    'images': ['static/description/main_screenshot.png']
+    "images": ['static/description/main_screenshot.png']
 }
